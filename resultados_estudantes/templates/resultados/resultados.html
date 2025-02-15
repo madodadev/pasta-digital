@@ -1,0 +1,61 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="{% static 'resultados/resultados.css' %}">
+</head>
+<body>
+    <section class="main">
+        <header>
+            <h1>Resultado de Avaliaçoes</h1>
+            <h2>Modulo: {{modulo.nome}}</h2>
+            <h2>Turma: {{modulo.turma.nome}}</h2>
+            <div  class="pautaDL">
+                <a href="{{pautaDL}}" target="_blank">Baixar Pauta</a>           
+            </div>
+        </header>
+        <table id="resTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Estudante</th>
+                    {%for avaliacao in avaliacoes%}
+                        <th>{{avaliacao.nome}}</th>
+                    {%endfor%}
+                </tr>
+            </thead>
+
+            <tbody>
+                {%for estudante in estudantes%}
+                <tr line_number="{{forloop.counter}}">
+                    <td>{{forloop.counter}}</td>
+                    <td>
+                        <a href="{{estudante.riLink}}" target="_blank" rel="noopener noreferrer">{{estudante.nome}}</a>
+                        <div class="btn_cont">
+                            <button class="res_btn res_btn_WD" value="WD">WD</button>
+                            <button class="res_btn res_bt_A" value="A">A</button>
+                            <button class="res_btn res_btn_NA" value="NA">NA</button>
+                        </div>
+                        
+                    </td>
+                    {%for avaliacao in avaliacoes%}
+                    <td>
+                    {% for resultado in estudante.resultados %}
+                            {% if resultado.avaliacao.pk == avaliacao.pk%}
+                                {% include "resultados/resultadosSelectBox.html" with resultado=resultado opcoesResultados=opcoesResultados%}
+                            {% endif %}
+                    {% endfor %}
+                    </td>
+                    {%endfor%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </section>
+    <script src="{% static 'resultados/resultados.js' %}"></script>
+</body>
+</html>

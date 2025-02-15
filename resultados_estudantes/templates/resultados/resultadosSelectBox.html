@@ -1,0 +1,45 @@
+<div class="resultados_cont">
+    {% with resultadoID=resultado.pk resultadoTipo='avaliacao' resultadoLetra=resultado.resultado_avaliacao opicaoPerfix="RESULTADO"%}
+        <select id="{{resultadoTipo}}_{{resultadoID}}" name="{{resultadoTipo}}_{{resultadoID}}" resultado="{{resultadoID}}" avaliacao="{{resultadoTipo}}" 
+        class="select_resultado select_resultado_{{resultadoTipo}} select_resultado_{{resultadoLetra}}">
+            {%for opicao in opcoesResultados%}
+                <option value="{{opicao}}" {%if opicao == resultadoLetra%}selected="selected"{% endif %}>
+                {{opicaoPerfix}} | {{opicao}}</option>
+            {%endfor%}
+            <option value="" {%if not resultadoLetra%}selected="selected"{% endif %}>
+            {{opicaoPerfix}} | NADA</option>
+        </select>
+    {% endwith %}
+
+    
+    <div class="{%if not resultado.resultado_avaliacao or resultado.resultado_avaliacao == "A"%}resultado_hide{% endif %}">
+        {% with resultadoID=resultado.id resultadoTipo='reavaliacao_1' resultadoLetra=resultado.resultado_reavaliacao1 opicaoPerfix="1ª REAVALICAO"%}
+            <select id="{{resultadoTipo}}_{{resultadoID}}" name="{{resultadoTipo}}_{{resultadoID}}" resultado="{{resultadoID}}" avaliacao="{{resultadoTipo}}" 
+            class="select_resultado select_resultado_{{resultadoTipo}} select_resultado_{{resultadoLetra}}">
+                {%for opicao in opcoesResultados%}
+                    <option value="{{opicao}}" {%if opicao == resultadoLetra%}selected="selected"{% endif %}>
+                    {{opicaoPerfix}} | {{opicao}}</option>
+                {%endfor%}
+                <option value="" {%if not resultadoLetra%}selected="selected"{% endif %}>
+                {{opicaoPerfix}} | NADA</option>
+            </select>
+        {% endwith %}
+    
+
+
+        <div class="{%if not resultado.resultado_avaliacao or resultado.resultado_avaliacao == "A" or not resultado.resultado_reavaliacao1 or resultado.resultado_reavaliacao1 == "A"%}resultado_hide{% endif %}">
+        {% with resultadoID=resultado.id resultadoTipo='reavaliacao_2' resultadoLetra=resultado.resultado_reavaliacao2 opicaoPerfix="2ª REAVALICAO"%}
+            <select id="{{resultadoTipo}}_{{resultadoID}}" name="{{resultadoTipo}}_{{resultadoID}}" resultado="{{resultadoID}}" avaliacao="{{resultadoTipo}}" 
+            class="select_resultado select_resultado_{{resultadoTipo}} select_resultado_{{resultadoLetra}}">
+                {%for opicao in opcoesResultados%}
+                    <option value="{{opicao}}" {%if opicao == resultadoLetra%}selected="selected"{% endif %}>
+                    {{opicaoPerfix}} | {{opicao}}</option>
+                {%endfor%}
+                <option value="" {%if not resultadoLetra%}selected="selected"{% endif %}>
+                {{opicaoPerfix}} | NADA</option>
+            </select>
+        {% endwith %}
+        </div>
+    </div>
+
+</div>

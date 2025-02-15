@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Pauta</title>
+    <link rel="stylesheet" href="{% static 'resultados/RI1_FolhaRosto.css' %}">
+    <style>
+        @media print {
+            @page {
+                padding: 1cm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="pauta_container">
+        <table>
+            <tr>
+                <th width="15%">Nome do centro</th>
+                <td width="50%" colspan="3" class="center_text"><b>{{modulo.turma.nome_do_centro|default:""}}</b></td>
+                <th width="15%">Número do Centro</th>
+                <td width="20%" class="center_text">{{modulo.turma.codigo_do_centro|default:""}}</td>
+            </tr>
+            <tr>
+                <th>Título da Qualificação</th>
+                <td colspan="3">CV4 - Técnico de Suporte Informático</td>
+                <th>Código da Qualificação</th>
+                <td></td>
+            </tr>
+
+            <tr>
+                <th colspan="4">Identificador da turma/grupo do Centro (opcional) pré-impresso</th>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <th colspan="4"><b>Título do Módulo: </b>{{modulo.nome|default:""}}</th>
+                <th colspan="2">Código do Módulo {{modulo.codigo|default:""}}</th>
+            </tr>
+
+            <tr>
+                <th width="35%" class="center_text" colspan="3">Nome do Candidato</th>
+                <th width="30%" class="center_text">Número do Candidato</th>
+                <th class="center_text">Resultado A/NA/WD ou D</th>
+                <th class="center_text">Assinatura do VE</th>
+            </tr>
+
+            {%for estudante in estudantes%}
+            <tr>
+                <td colspan="3">{{estudante.nome}}</td>
+                <td>{{estudante.codigo|default:""}}</td>
+                <td class="center_text"><b>{{estudante.resultadoFinal|default:""}}</b></td>
+                <td></td>
+            </tr>
+            {%endfor%}
+
+            <tr>
+                <th class="center_text" colspan="6">Para uso do Verificador Externo</th>
+            </tr>
+            <tr>
+                <th width="20%" colspan="2">Nome do Verificador Externo:</th>
+                <td colspan="2"></td>
+                <th colspan="2">Data:</th>
+            </tr>
+            <tr>
+                <th width="20%" colspan="2">Assinatura:</th>
+                <td colspan="2"></td>
+                <td colspan="2"></td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>

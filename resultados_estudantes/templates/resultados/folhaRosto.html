@@ -1,0 +1,96 @@
+<table>
+    <tr class="table_control">
+        <td width="50%"></td>
+        <td width="5%"></td>
+        <td colspan="3"></td>
+    </tr>
+    <tr>
+        <td colspan="5">
+            <span class="header">Modulo:</span>
+            <span class="data">{% if modulo.nome %}{{modulo.nome}}{% endif %}</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="center_text">A ser preenchido pelo estudante</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span class="header">Nome do candidato:</span>
+            <span class="data name">{{estudante.nome}}</span>
+        </td>
+        <td>
+            <span class="header">Data:</span>
+            <span class="data">{% if modulo.data_assinatura_estudante%}{{modulo.data_assinatura_estudante}}{% endif %}</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5">Assinatura do candidato:</td>
+    </tr>
+    {%for resultado in resultados%}
+    <tr>
+        <td colspan="5" class="center_text data">AVALIAÇÃO {% if resultado.avaliacao.nome %}{{resultado.avaliacao.nome|upper}}{% endif %}</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <span class="header">Resultado de aprendizagem {% if resultado.avaliacao.resultado_aprendizagem.numero %} {{resultado.avaliacao.resultado_aprendizagem.numero}} {% endif %}: </span>
+            <span class="data">{% if resultado.avaliacao.resultado_aprendizagem.nome %}{{resultado.avaliacao.resultado_aprendizagem.nome}}{% endif %}</span>
+        </td>
+
+        <td>
+            <span class="header">Data:</span>
+            <span class="data">{% if resultado.avaliacao.data_avaliacao %}{{resultado.avaliacao.data_avaliacao}}{% endif %}</span>
+        </td>
+
+    </tr>
+    <tr>
+        <td rowspan="5" colspan="2" class="center_text" style="vertical-align: super;">Feedback do professor para o candidato</td>
+        <td colspan="3" class="header center_text">Resultado</td>
+    </tr>
+    <tr>
+        <td width="12%" rowspan="3"><span class="{% if resultado.resultado_final == "A"%}alcancou_border{% endif %}">Alcançou</span></td>
+        <td width="15%">1ª avaliação</td>
+        <td width="18%" class="data resValue">{% if resultado.resultado_avaliacao%}{{resultado.resultado_avaliacao}}{% endif %}</td>
+    </tr>
+    <tr>
+        <td>1ª reavaliação</td>
+        <td class="data resValue">{% if resultado.resultado_reavaliacao1%}{{resultado.resultado_reavaliacao1}}{% endif %}</td>
+    </tr>
+    <tr>
+        <td>2ª reavaliação</td>
+        <td class="data resValue">{% if resultado.resultado_reavaliacao2%}{{resultado.resultado_reavaliacao2}}{% endif %}</td>
+    </tr>
+    <tr>
+        <td colspan="2" ><span class="{% if resultado.resultado_final != "A"%}naoAlcancou_border{% endif %}">Não Alcançou</span></td>
+        <td></td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td class="center_text">A ser preenchido pelo avaliador</td>
+        <td colspan="4" class="center_text">A ser preenchido pelo verificador interno</td>
+    </tr>
+    <tr>
+        <td > 
+            <span class="header">Avaliador:</span>
+            <span class="data name">{% if modulo.avaliador %}{{modulo.avaliador}}{% endif %}</span>
+        </td>
+        <td colspan="4">
+            <span class="header">Verificador interno:</span>
+            <span class="data name">{% if modulo.verificador_interno %}{{modulo.verificador_interno}}{% endif %}</span>
+        </td>
+    </tr>
+    <tr>
+        <td >Assinatura do avaliador: </td>
+        <td colspan="4">Assinatura do verificador interno</td>
+    </tr>
+    <tr>
+        <td> 
+            <span class="header">Data:</span>
+            <span class="data">{% if modulo.data_assinatura_avaliador %}{{modulo.data_assinatura_avaliador}}{% endif %}</span>
+        </td>
+        <td colspan="4">
+            <span class="header">Data:</span>
+            <span class="data">{% if modulo.data_assinatura_verificador %}{{modulo.data_assinatura_verificador}}{% endif %}</span>
+        </td>
+    </tr>
+</table>

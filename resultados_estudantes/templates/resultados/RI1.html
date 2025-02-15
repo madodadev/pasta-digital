@@ -1,0 +1,134 @@
+<div class="modulo_table">
+    <table>
+        <tr>
+            <th colspan="6" style="text-align: center;">Registo dos resultados de avaliação do módulo RI 1</th>
+        </tr>
+        <tr>
+            <th>Título do Módulo</th>
+            <td colspan="3">{% if modulo.nome %}{{modulo.nome}}{% endif %}</td>
+            <th>Código do Módulo:</th>
+            <td>{% if modulo.codigo %}{{modulo.codigo}}{% endif %}</td>
+        </tr>
+        <tr>
+            <th width="15%">Nível do QNQP</th>
+            <td width="20%">{% if modulo.nivelQNQP %}{{modulo.nivelQNQP}}{% endif %}</td>
+            <th width="15%">Créditos</th>
+            <td width="15%">{% if modulo.creditos %}{{modulo.creditos}}{% endif %}</td>
+            <th width="15%">Bimestre:</th>
+            <td width="20%">{% if modulo.bimestre %}{{modulo.bimestre}}{% endif %}</td>
+        </tr>
+        
+    </table>
+</div>
+
+
+<div class="main_table">
+    <table class="main_head_table">
+        <tr>
+            <th>Nome do estudante:</th>
+            <td colspan="3">{{estudante.nome}}</td>
+        </tr>
+        <tr>
+            <th width="25%">Código do estudante:</th>
+            <td width="40%">{% if estudante.codigo %}{{estudante.codigo}}{% endif %}</td>
+
+            <th width="10%">Turma:</th>
+            <td width="25%">{% if estudante.turma.nome %}{{estudante.turma.nome}}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Data de ingresso:</th>
+            <td colspan="3">{% if estudante.ano_ingresso %}{{estudante.ano_ingresso}}{% endif %}</td>
+        </tr>
+        <tr>
+            <th style="border:none" colspan="4"></th>
+        </tr>
+    </table>
+    <table class="main_botton_table">
+        <tr>
+            <th width="10%" rowspan="2">Resultado de aprendizagem</th>
+            <th width="15%" rowspan="2">Instrumento da avaliação</th>
+            <th width="10%" rowspan="2">Resultado da Avaliação</th>
+            <th width="15%" rowspan="2">Data</th>
+            <th width="25%" colspan="2">1a Reavaliação</th>
+            <th width="25%" colspan="2">2a Reavaliação</th>
+        </tr>
+
+        <tr>
+            <th width="10%">Resultado</th>
+            <th>Data</th>
+
+            <th width="10%">Resultado</th>
+            <th>Data</th>
+        </tr>
+        {% for resultado in resultados %}
+        <tr>
+            <td>{% if resultado.avaliacao.resultado_aprendizagem.numero %} {{resultado.avaliacao.resultado_aprendizagem.numero}} {% endif %}</td>
+            <td>{% if resultado.avaliacao.nome %}{{resultado.avaliacao.nome}}{% endif %}</td>
+            
+            <td class="data resValue">{% if resultado.resultado_avaliacao%}{{resultado.resultado_avaliacao}}{% endif %}</td>
+            <td>{% if resultado.resultado_avaliacao and resultado.avaliacao.data_avaliacao %}{{resultado.avaliacao.data_avaliacao}}{% endif %}</td>
+            
+            <td class="data resValue">{% if resultado.resultado_reavaliacao1%}{{resultado.resultado_reavaliacao1}}{% endif %}</td>
+            <td>{% if resultado.resultado_reavaliacao1 and resultado.avaliacao.data_reavaliacao1 %}{{resultado.avaliacao.data_reavaliacao1}}{% endif %}</td>
+            
+            <td class="data resValue">{% if resultado.resultado_reavaliacao2%}{{resultado.resultado_reavaliacao2}}{% endif %}</td>
+            <td>{% if resultado.resultado_reavaliacao2 and resultado.avaliacao.data_reavaliacao2 %}{{resultado.avaliacao.data_reavaliacao2}}{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</div>
+
+
+<div class="avaliadores_table">
+    <table>
+        <tr>
+            <td colspan="2">
+                <span class="header">Nome do avaliador:</span>
+                <span class="data">{{modulo.avaliador|default:""}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="header">Assinatura do Avaliador:</span>
+                <span class="data"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="header">Data da avaliação Final:</span>
+                <span class="data">{{data_ultimaAvalicao|default:""}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="header">Nome do verificador interno:</span>
+                <span class="data">{{modulo.verificador_interno|default:""}}</span>
+            </td>
+        
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <span class="header">Data da verificação:</span>
+                <span class="data">{% if modulo.data_assinatura_verificador %}{{modulo.data_assinatura_verificador}}{% endif %}</span>
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <span class="header">Assinatura do verificador interno:</span>
+                <span class="data"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Resultado final do módulo </th>
+            <th>Feedback/Observações</th>
+        </tr>
+        <tr>
+            <td width="20%" class="resValue">{% if resultadoFinal_modulo %}{{resultadoFinal_modulo}}{% endif %}</td>
+            <td></td>
+        </tr>
+    </table>
+</div>
